@@ -69,7 +69,6 @@
 		jsonData = (NSDictionary *)[parsedDataString JSONValue];
 	}
 	//if (!jsonData)
-	//	NSLog(@"parsedDataString = %@", parsedDataString);
 
 	return jsonData;
 }

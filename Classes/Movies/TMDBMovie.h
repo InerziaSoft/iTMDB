@@ -73,17 +73,6 @@
 + (TMDBMovie *)movieWithID:(NSInteger)anID context:(TMDB *)context;
 
 /**
- * Creates a fetch request for the movie with the provided name, and returns an object representing that movie.
- *
- * The context gets notified using [TMDB movieDidFinishLoading:] when the movie object has finished loading.
- *
- * @param aName The TMDb ID of the movie to be looked up.
- * @param context The IMDb context from which the lookup should be made.
- * @return An object representing the movie.
- */
-+ (TMDBMovie *)movieWithName:(NSString *)aName context:(TMDB *)context;
-
-/**
  * Creates a fetch request for the movie with the provided TMDb ID, and returns an object representing that movie.
  *
  * The context gets notified using [TMDB movieDidFinishLoading:] when the movie object has finished loading.
@@ -93,17 +82,6 @@
  * @return An object representing the movie.
  */
 - (id)initWithID:(NSInteger)anID context:(TMDB *)context;
-
-/**
- * Creates a fetch request for the movie with the provided name, and returns an object representing that movie.
- *
- * The context gets notified using [TMDB movieDidFinishLoading:] when the movie object has finished loading.
- *
- * @param aName The TMDb ID of the movie to be looked up.
- * @param context The IMDb context from which the lookup should be made.
- * @return An object representing the movie.
- */
-- (id)initWithName:(NSString *)aName context:(TMDB *)context;
 
 /** @name Basic Information */
 

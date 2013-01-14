@@ -56,11 +56,6 @@
 	return [[TMDBMovie alloc] initWithID:anID context:aContext];
 }
 
-+ (TMDBMovie *)movieWithName:(NSString *)aName context:(TMDB *)aContext
-{
-	return [[TMDBMovie alloc] initWithName:aName context:aContext];
-}
-
 - (id)initWithURL:(NSURL *)url context:(TMDB *)aContext
 {
 	return [self initWithURL:url context:aContext userData:nil];
@@ -115,19 +110,12 @@
 
 - (id)initWithID:(NSInteger)anID context:(TMDB *)aContext
 {
-	NSURL *url = [NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%.1f/Movie.getInfo/%@/json/%@/%li",
-									   API_VERSION, aContext.language, aContext.apiKey, anID]];
+    ///3/movie/{id}
+    
+	NSURL *url = [NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%.1d/movie/%ld?api_key=%@&language=%@",
+									   API_VERSION, anID, aContext.apiKey, aContext.language]];
 	isSearchingOnly = NO;
 	return [self initWithURL:url context:aContext];
-}
-
-- (id)initWithName:(NSString *)aName context:(TMDB *)aContext
-{
-	NSString *aNameEscaped = [aName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-	NSURL *url = [NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%.1f/Movie.search/%@/json/%@/%@",
-									   API_VERSION, aContext.language, aContext.apiKey, aNameEscaped]];
-	isSearchingOnly = YES;
-	return [self initWithURL:url context:aContext userData:[NSDictionary dictionaryWithObject:aName forKey:@"title"]];
 }
 
 #pragma mark -

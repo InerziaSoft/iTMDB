@@ -11,19 +11,20 @@
 #import "TMDBDelegate.h"
 #import "TMDBToken.h"
 #import "TMDBMovie.h"
+#import "TMDBMovieCollection.h"
 
 @interface TMDB : NSObject {
 @protected
 	id<TMDBDelegate> __unsafe_unretained _delegate;
 	NSString *_apiKey;
 	NSString *_language;
-
 	TMDBToken *_token;
 }
 
 @property (nonatomic, unsafe_unretained) id<TMDBDelegate> delegate;
 @property (nonatomic, strong) NSString *apiKey;
 @property (nonatomic, strong) NSString *language;
+@property (nonatomic, strong) NSDictionary *configuration;
 
 @property (nonatomic, strong, readonly) TMDBToken *token;
 
@@ -38,11 +39,11 @@
 /**
  * 
  */
-- (void)movieDidFinishLoading:(TMDBMovie *)aMovie;
+- (void)movieDidFinishLoading:(id)aMovie;
 /**
  * 
  */
-- (void)movieDidFailLoading:(TMDBMovie *)aMovie error:(NSError *)error;
+- (void)movieDidFailLoading:(id)aMovie error:(NSError *)error;
 
 /** @name Convenience Methods */
 /**
@@ -60,6 +61,6 @@
  *
  * @param aName The name of the movie to fetch information about.
  */
-- (TMDBMovie *)movieWithName:(NSString *)aName;
+- (TMDBMovieCollection *)movieWithName:(NSString *)aName;
 
 @end

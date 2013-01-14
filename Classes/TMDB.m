@@ -28,16 +28,28 @@
 
 #pragma mark -
 #pragma mark Notifications
-- (void)movieDidFinishLoading:(TMDBMovie *)aMovie
+- (void)movieDidFinishLoading:(id)aMovie
 {
-	if (_delegate)
-		[_delegate tmdb:self didFinishLoadingMovie:aMovie];
+	if (_delegate) {
+        if ([aMovie isMemberOfClass:[TMDBMovieCollection class]]) {
+            [_delegate tmdb:self didFinishLoadingMovieCollection:aMovie];
+        }
+        else {
+            [_delegate tmdb:self didFinishLoadingMovie:aMovie];
+        }
+    }
 }
 
-- (void)movieDidFailLoading:(TMDBMovie *)aMovie error:(NSError *)error
+- (void)movieDidFailLoading:(id)aMovie error:(NSError *)error
 {
-	if (_delegate)
-		[_delegate tmdb:self didFailLoadingMovie:aMovie error:error];
+	if (_delegate) {
+        if ([aMovie isMemberOfClass:[TMDBMovieCollection class]]) {
+            [_delegate tmdb:self didFailLoadingMovieCollection:aMovie error:error];
+        }
+        else {
+            [_delegate tmdb:self didFailLoadingMovie:aMovie error:error]; 
+        }
+    }
 }
 
 #pragma mark -
@@ -47,9 +59,9 @@
 	return [TMDBMovie movieWithID:anID context:self];
 }
 
-- (TMDBMovie *)movieWithName:(NSString *)aName
+- (TMDBMovieCollection *)movieWithName:(NSString *)aName
 {
-	return [TMDBMovie movieWithName:aName context:self];
+	return [TMDBMovieCollection collectionWithName:aName andContext:self];
 }
 
 #pragma mark -

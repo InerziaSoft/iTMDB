@@ -48,8 +48,13 @@
 		AAF43A1012835F9400F5CC92 /* TMDBRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF43A0E12835F9400F5CC92 /* TMDBRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAF43A1112835F9400F5CC92 /* TMDBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF43A0F12835F9400F5CC92 /* TMDBRequest.m */; };
 		AAF43A21128361C400F5CC92 /* TMDBDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF43A20128361C400F5CC92 /* TMDBDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AAFA3EB312863A78002B9E38 /* TMDBImage.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFA3EB112863A77002B9E38 /* TMDBImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AAFA3EB412863A78002B9E38 /* TMDBImage.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA3EB212863A78002B9E38 /* TMDBImage.m */; };
+		FA2DA05416A4946800FA51A1 /* TMDBPromisedMovie.h in Headers */ = {isa = PBXBuildFile; fileRef = FA2DA05216A4946800FA51A1 /* TMDBPromisedMovie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA2DA05516A4946800FA51A1 /* TMDBPromisedMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2DA05316A4946800FA51A1 /* TMDBPromisedMovie.m */; };
+		FA2DA05916A497DB00FA51A1 /* TMDBImage.h in Headers */ = {isa = PBXBuildFile; fileRef = FA2DA05716A497DB00FA51A1 /* TMDBImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA2DA05A16A497DB00FA51A1 /* TMDBImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2DA05816A497DB00FA51A1 /* TMDBImage.m */; };
+		FA2DA05C16A4A37500FA51A1 /* TMDBImageDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FA2DA05B16A4A30B00FA51A1 /* TMDBImageDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA3F411B16A31AA700E3AF19 /* TMDBMovieCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = FA3F411916A31AA700E3AF19 /* TMDBMovieCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA3F411C16A31AA700E3AF19 /* TMDBMovieCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3F411A16A31AA700E3AF19 /* TMDBMovieCollection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,9 +104,14 @@
 		AAF43A0E12835F9400F5CC92 /* TMDBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDBRequest.h; path = Classes/Requests/TMDBRequest.h; sourceTree = "<group>"; };
 		AAF43A0F12835F9400F5CC92 /* TMDBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMDBRequest.m; path = Classes/Requests/TMDBRequest.m; sourceTree = "<group>"; };
 		AAF43A20128361C400F5CC92 /* TMDBDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDBDelegate.h; path = Classes/TMDBDelegate.h; sourceTree = "<group>"; };
-		AAFA3EB112863A77002B9E38 /* TMDBImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDBImage.h; path = Classes/Movies/TMDBImage.h; sourceTree = "<group>"; };
-		AAFA3EB212863A78002B9E38 /* TMDBImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMDBImage.m; path = Classes/Movies/TMDBImage.m; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		FA2DA05216A4946800FA51A1 /* TMDBPromisedMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDBPromisedMovie.h; path = Classes/Movies/TMDBPromisedMovie.h; sourceTree = "<group>"; };
+		FA2DA05316A4946800FA51A1 /* TMDBPromisedMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMDBPromisedMovie.m; path = Classes/Movies/TMDBPromisedMovie.m; sourceTree = "<group>"; };
+		FA2DA05716A497DB00FA51A1 /* TMDBImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDBImage.h; path = Classes/Movies/TMDBImage.h; sourceTree = "<group>"; };
+		FA2DA05816A497DB00FA51A1 /* TMDBImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMDBImage.m; path = Classes/Movies/TMDBImage.m; sourceTree = "<group>"; };
+		FA2DA05B16A4A30B00FA51A1 /* TMDBImageDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TMDBImageDelegate.h; path = Classes/Movies/TMDBImageDelegate.h; sourceTree = "<group>"; };
+		FA3F411916A31AA700E3AF19 /* TMDBMovieCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDBMovieCollection.h; path = Classes/Movies/TMDBMovieCollection.h; sourceTree = "<group>"; };
+		FA3F411A16A31AA700E3AF19 /* TMDBMovieCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMDBMovieCollection.m; path = Classes/Movies/TMDBMovieCollection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +225,10 @@
 				AAFA3EAD12863A5B002B9E38 /* Images */,
 				AAF4389D12834E6600F5CC92 /* TMDBMovie.h */,
 				AAF4389E12834E6600F5CC92 /* TMDBMovie.m */,
+				FA3F411916A31AA700E3AF19 /* TMDBMovieCollection.h */,
+				FA3F411A16A31AA700E3AF19 /* TMDBMovieCollection.m */,
+				FA2DA05216A4946800FA51A1 /* TMDBPromisedMovie.h */,
+				FA2DA05316A4946800FA51A1 /* TMDBPromisedMovie.m */,
 			);
 			name = Movies;
 			sourceTree = "<group>";
@@ -303,8 +317,9 @@
 		AAFA3EAD12863A5B002B9E38 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				AAFA3EB112863A77002B9E38 /* TMDBImage.h */,
-				AAFA3EB212863A78002B9E38 /* TMDBImage.m */,
+				FA2DA05B16A4A30B00FA51A1 /* TMDBImageDelegate.h */,
+				FA2DA05716A497DB00FA51A1 /* TMDBImage.h */,
+				FA2DA05816A497DB00FA51A1 /* TMDBImage.m */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -323,7 +338,6 @@
 				AAF438C712834FC400F5CC92 /* TMDBToken.h in Headers */,
 				AAF437F61283464D00F5CC92 /* TMDBRequestDelegate.h in Headers */,
 				AAF4389F12834E6600F5CC92 /* TMDBMovie.h in Headers */,
-				AAFA3EB312863A78002B9E38 /* TMDBImage.h in Headers */,
 				AAF43A1012835F9400F5CC92 /* TMDBRequest.h in Headers */,
 				AA3242CD12CBEF2F00063558 /* TMDBPerson.h in Headers */,
 				AAA5D5661482A04100BD9791 /* NSObject+SBJson.h in Headers */,
@@ -339,6 +353,10 @@
 				AAA5D5791482A04100BD9791 /* SBJsonTokeniser.h in Headers */,
 				AAA5D57B1482A04100BD9791 /* SBJsonUTF8Stream.h in Headers */,
 				AAA5D57D1482A04100BD9791 /* SBJsonWriter.h in Headers */,
+				FA3F411B16A31AA700E3AF19 /* TMDBMovieCollection.h in Headers */,
+				FA2DA05416A4946800FA51A1 /* TMDBPromisedMovie.h in Headers */,
+				FA2DA05916A497DB00FA51A1 /* TMDBImage.h in Headers */,
+				FA2DA05C16A4A37500FA51A1 /* TMDBImageDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +388,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = Apoltix;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "iTMDb" */;
@@ -413,7 +431,6 @@
 				AAF4385712834B7600F5CC92 /* TMDBToken.m in Sources */,
 				AAF438A012834E6600F5CC92 /* TMDBMovie.m in Sources */,
 				AAF43A1112835F9400F5CC92 /* TMDBRequest.m in Sources */,
-				AAFA3EB412863A78002B9E38 /* TMDBImage.m in Sources */,
 				AA3242CE12CBEF2F00063558 /* TMDBPerson.m in Sources */,
 				AAA5D5671482A04100BD9791 /* NSObject+SBJson.m in Sources */,
 				AAA5D56A1482A04100BD9791 /* SBJsonParser.m in Sources */,
@@ -427,6 +444,9 @@
 				AAA5D57A1482A04100BD9791 /* SBJsonTokeniser.m in Sources */,
 				AAA5D57C1482A04100BD9791 /* SBJsonUTF8Stream.m in Sources */,
 				AAA5D57E1482A04100BD9791 /* SBJsonWriter.m in Sources */,
+				FA3F411C16A31AA700E3AF19 /* TMDBMovieCollection.m in Sources */,
+				FA2DA05516A4946800FA51A1 /* TMDBPromisedMovie.m in Sources */,
+				FA2DA05A16A497DB00FA51A1 /* TMDBImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,7 +482,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = iTMDb;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -483,7 +503,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = iTMDb;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

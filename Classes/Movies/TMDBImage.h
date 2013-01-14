@@ -2,46 +2,30 @@
 //  TMDBImage.h
 //  iTMDb
 //
-//  Created by Christian Rasmussen on 07/11/10.
-//  Copyright 2010 Apoltix. All rights reserved.
+//  Created by Alessio Moiso on 14/01/13.
+//  Copyright (c) 2013 Apoltix. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
+#import "TMDB.h"
+#import "TMDBImageDelegate.h"
 
 typedef enum {
 	TMDBImageTypePoster,
 	TMDBImageTypeBackdrop
 } TMDBImageType;
 
-typedef enum {
-	TMDBImageSizeOriginal = 1 << 1,
-	TMDBImageSizeMid      = 1 << 2,
-	TMDBImageSizeCover    = 1 << 3,
-	TMDBImageSizeThumb    = 1 << 4
-} TMDBImageSize;
+@interface TMDBImage : NSObject <TMDBRequestDelegate>
 
-/**
- * A `TMDBImage` object represents an image in one-to-many sizes.
- */
-@interface TMDBImage : NSObject {
-	NSString *_id;
-	TMDBImageType _type;
-	NSMutableDictionary *_data;
-}
+@property TMDBImageType type;
+@property NSURL *address;
+@property BOOL ready;
+@property TMDB *context;
+@property TMDBRequest *configurationRequest;
+@property id<TMDBImageDelegate> delegate;
 
-@property (nonatomic, assign, readonly) TMDBImageType type;
-@property (nonatomic, assign, readonly) TMDBImageSize sizes;
-@property (nonatomic, strong, readonly) NSString *id;
++ (TMDBImage*)imageWithAddress:(NSURL*)address imageType:(TMDBImageType)type context:(TMDB*)aContext;
 
-+ (TMDBImage *)imageWithId:(NSString *)anID ofType:(TMDBImageType)type;
-
-- (TMDBImage *)initWithId:(NSString *)anID ofType:(TMDBImageType)type;
-
-- (NSURL *)urlForSize:(TMDBImageSize)size;
-- (void)setURL:(NSURL *)url forSize:(TMDBImageSize)size;
-
-- (CGSize)sizeForSize:(TMDBImageSize)size;
-
-- (NSUInteger)sizeCount;
+- (id)initWithAddress:(NSURL*)address imageType:(TMDBImageType)type context:(TMDB*)aContext;
 
 @end

@@ -22,7 +22,7 @@
 {
 	if ((self = [self init]))
 	{
-		_request = [TMDBRequest requestWithURL:[NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%.1f/Auth.getToken/json/%@"]]
+		_request = [TMDBRequest requestWithURL:[NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%i/Auth.getToken/json/%@"]]
 									  delegate:delegate];
 	}
 

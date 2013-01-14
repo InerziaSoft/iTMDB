@@ -10,6 +10,7 @@
 
 @class TMDB;
 @class TMDBMovie;
+@class TMDBMovieCollection;
 
 /**
  * An instance that acts as a delegate of `TMDB` objects must implement the `TMDBDelegate` protocol.
@@ -26,6 +27,7 @@
  * @param movie The loaded movie.
  */
 - (void)tmdb:(TMDB *)context didFinishLoadingMovie:(TMDBMovie *)movie;
+- (void)tmdb:(TMDB *)context didFinishLoadingMovieCollection:(TMDBMovieCollection *)movie;
 
 /**
  * Called when a movie failed loading.
@@ -35,5 +37,6 @@
  * @param error Information about the loading error.
  */
 - (void)tmdb:(TMDB *)context didFailLoadingMovie:(TMDBMovie *)movie error:(NSError *)error;
+- (void)tmdb:(TMDB *)context didFailLoadingMovieCollection:(TMDBMovieCollection *)movie error:(NSError*)error;
 
 @end
