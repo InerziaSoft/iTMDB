@@ -72,7 +72,7 @@
 	if ([movieID integerValue] > 0)
 		movie = [tmdb movieWithID:[movieID integerValue]];
 	else
-		movie = [tmdb movieWithName:[movieName stringValue]];
+		movieCollection = [tmdb movieWithName:[movieName stringValue]];
 }
 
 - (IBAction)viewAllData:(id)sender
@@ -85,24 +85,36 @@
 	[allDataWindow makeKeyAndOrderFront:self];
 }
 
+- (IBAction)loadSelectedPromisedMovie:(id)sender {
+    if ([[multipleMoviesController selectedObjects] count] > 0) {
+        TMDBPromisedMovie *mov = [[multipleMoviesController selectedObjects] objectAtIndex:0];
+        movie = [tmdb movieWithID:[[mov identifier] intValue]];
+    }
+}
+
 #pragma mark -
 #pragma mark TMDBDelegate
 
 - (void)tmdb:(TMDB *)context didFinishLoadingMovie:(TMDBMovie *)aMovie
 {
 	printf("%s\n", [[aMovie description] UTF8String]);
-
+    
+    [NSApp endSheet:multipleMovies];
+    [multipleMovies orderOut:self];
+    
 	[throbber stopAnimation:self];
 	[goButton setEnabled:YES];
 	[viewAllDataButton setEnabled:YES];
 
-	allData = [[NSArray alloc] initWithArray:aMovie.rawResults copyItems:YES];
+	allData = [[NSDictionary alloc] initWithDictionary:aMovie.rawResults copyItems:YES];
 
 	[movieTitle setStringValue:aMovie.title ? : @""];
 	[movieOverview setString:aMovie.overview ? : @""];
 	[movieRuntime setStringValue:[NSString stringWithFormat:@"%lu", aMovie.runtime] ? : @""];
 
 	[movieKeywords setStringValue:[aMovie.keywords componentsJoinedByString:@", "] ? : @""];
+    [movieGenres setStringValue:[aMovie.genres componentsJoinedByString:@", "] ? : @""];
+    [movieCountries setStringValue:[aMovie.countries componentsJoinedByString:@", "] ? : @""];
 
 	NSDateFormatter *releaseDateFormatter = [[NSDateFormatter alloc] init];
 	[releaseDateFormatter setDateFormat:@"dd-MM-yyyy"];
@@ -110,6 +122,19 @@
 
 	[moviePostersCount setStringValue:[NSString stringWithFormat:@"%lu", [aMovie.posters count]]];
 	[movieBackdropsCount setStringValue:[NSString stringWithFormat:@"%lu", [aMovie.backdrops count]]];
+}
+
+- (void)tmdb:(TMDB *)context didFinishLoadingMovieCollection:(TMDBMovieCollection *)aMovie {
+    self.multipleMoviesArray = [NSMutableArray array];
+    for (TMDBPromisedMovie *proM in [aMovie results]) {
+        [multipleMoviesController addObject:proM];
+    }
+    
+    [NSApp beginSheet:multipleMovies modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
+}
+
+- (void)tmdb:(TMDB *)context didFailLoadingMovieCollection:(TMDBMovieCollection *)movie error:(NSError*)error {
+    
 }
 		
 - (void)tmdb:(TMDB *)context didFailLoadingMovie:(TMDBMovie *)movie error:(NSError *)error

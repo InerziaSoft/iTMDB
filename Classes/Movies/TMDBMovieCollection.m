@@ -41,30 +41,29 @@
 	}
     
     _rawResults = [[NSArray alloc] initWithArray:(NSArray *)[[request parsedData] valueForKey:@"results"] copyItems:YES];
-    NSLog(@"%@", _rawResults);
     _results = [NSMutableArray arrayWithCapacity:[_rawResults count]];
     for (NSDictionary *movie in _rawResults) {
         TMDBPromisedMovie *proMovie = [TMDBPromisedMovie promisedMovie];
         
         [proMovie setAdult:[NSNumber numberWithBool:(BOOL)[movie valueForKey:@"adult"]]];
-        [proMovie setIdentifier:[NSNumber numberWithInt:(int)[movie valueForKey:@"id"]]];
+        [proMovie setIdentifier:[movie valueForKey:@"id"]];
         
-        if ([[movie valueForKey:@"backdrop_path"] isMemberOfClass:[NSString class]]) {
+        if ([movie valueForKey:@"backdrop_path"] != nil) {
             [proMovie setBackdrop:[movie valueForKey:@"backdrop_path"]];
         }
-        if ([[movie valueForKey:@"backdrop_path"] isMemberOfClass:[NSString class]]) {
+        if ([movie valueForKey:@"backdrop_path"] != nil) {
             [proMovie setPoster:[movie valueForKey:@"poster_path"]];
         }
-        if ([[movie valueForKey:@"original_title"] isMemberOfClass:[NSString class]]) {
+        if ([movie valueForKey:@"original_title"] != nil) {
             [proMovie setOriginalTitle:[movie valueForKey:@"original_title"]];
         }
-        if ([[movie valueForKey:@"title"] isMemberOfClass:[NSString class]]) {
+        if ([movie valueForKey:@"title"] != nil) {
             [proMovie setTitle:[movie valueForKey:@"title"]];
         }
         if ([movie valueForKey:@"popularity"] != nil) {
-            [proMovie setPopularity:[NSNumber numberWithFloat:[[movie valueForKey:@"popularity"] floatValue]]];
+            [proMovie setPopularity:[movie valueForKey:@"popularity"]];
         }
-        if ([movie valueForKey:@"release_date"] != nil) {
+        if (![[movie valueForKey:@"release_date"] isMemberOfClass:[NSNull class]]) {
             NSDateComponents *date = [[NSDateComponents alloc] init];
             NSArray *components = [[movie valueForKey:@"release_date"] componentsSeparatedByString:@"-"];
             [date setYear:[[components objectAtIndex:0] intValue]];
@@ -74,9 +73,14 @@
             [proMovie setReleaseDate:[cal dateFromComponents:date]];
         }
         if ([movie valueForKey:@"vote_average"] != nil) {
-            [proMovie setRate:[NSNumber numberWithInt:(int)[movie valueForKey:@"vote_average"]]];
+            [proMovie setRate:[movie valueForKey:@"vote_average"]];
         }
+        
+        [_results addObject:proMovie];
     }
+    
+    if (_context)
+		[_context movieDidFinishLoading:self];
 }
 
 @end

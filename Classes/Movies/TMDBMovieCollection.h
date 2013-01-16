@@ -16,7 +16,7 @@
 
 @interface TMDBMovieCollection : NSObject <TMDBRequestDelegate>
 
-@property NSArray *results;
+@property NSMutableArray *results;
 @property TMDBRequest *request;
 @property TMDB *context;
 @property NSArray *rawResults;

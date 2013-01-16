@@ -6,10 +6,10 @@
 //  Copyright 2010 Apoltix. All rights reserved.
 //
 
-#import "TMDBPerson.h"
+#import "TMDBPromisedPerson.h"
 #import "TMDBMovie.h"
 
-@implementation TMDBPerson
+@implementation TMDBPromisedPerson
 
 @synthesize id=_id, name=_name, character=_character, movie=_movie, job=_job, url=_url, order=_order, castID=_castID, profileURL=_profileURL;
 
@@ -18,7 +18,7 @@
 	NSMutableArray *persons = [NSMutableArray arrayWithCapacity:[personsInfo count]];
 
 	for (NSDictionary *person in personsInfo)
-		[persons addObject:[[TMDBPerson alloc] initWithMovie:movie personInfo:person]];
+		[persons addObject:[[TMDBPromisedPerson alloc] initWithMovie:movie personInfo:person]];
 
 	return persons;
 }
@@ -45,14 +45,14 @@
 	if (_movie      &&
 		_character  && ![_character isKindOfClass:[NSNull class]] && [_character length] > 0 &&
 		_name       && ![_name isKindOfClass:[NSNull class]]      && [_name length] > 0)
-		return [NSString stringWithFormat:@"<%@: %@ as \"%@\" in \"%@\"%@>", [self class], _name, _character, _movie.title, _movie.year > 0 ? [NSString stringWithFormat:@" (%li)", _movie.year] : @"", nil];
+		return [NSString stringWithFormat:@"<%@: %@ as '%@' in '%@' %@>", [self class], _name, _character, _movie.title, _movie.year > 0 ? [NSString stringWithFormat:@" (%li)", _movie.year] : @"", nil];
 	else if (_movie &&
 			 _name  && ![_name isKindOfClass:[NSNull class]]      && [_name length] > 0      &&
 			 _job   && ![_job isKindOfClass:[NSNull class]]       && [_job length] > 0)
-		return [NSString stringWithFormat:@"<%@: %@ as %@ of \"%@\"%@>", [self class], _name, _job, _movie.title, _movie.year > 0 ? [NSString stringWithFormat:@" (%li)", _movie.year] : @"", nil];
+		return [NSString stringWithFormat:@"<%@: %@ as %@ of '%@' %@>", [self class], _name, _job, _movie.title, _movie.year > 0 ? [NSString stringWithFormat:@" (%li)", _movie.year] : @"", nil];
 	else if (_movie &&
 			 _name  && ![_name isKindOfClass:[NSNull class]]      && [_name length] > 0)
-		return [NSString stringWithFormat:@"<%@: %@ in \"%@\"%@>", [self class], _name, _movie.title, _movie.year > 0 ? [NSString stringWithFormat:@" (%li)", _movie.year] : @"", nil];
+		return [NSString stringWithFormat:@"<%@: %@ in '%@' %@>", [self class], _name, _movie.title, _movie.year > 0 ? [NSString stringWithFormat:@" (%li)", _movie.year] : @"", nil];
 	else if (_name  && ![_name isKindOfClass:[NSNull class]]      && [_name length] > 0)
 		return [NSString stringWithFormat:@"<%@: %@>", [self class], _name, nil];
 

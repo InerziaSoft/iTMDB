@@ -25,7 +25,7 @@
 
 	NSDictionary	*_userData;
 	NSInteger		_id;
-	NSArray			*_rawResults;
+	NSDictionary	*_rawResults;
 	NSString		*_title;
 	NSDate			*_released;
 	NSString		*_overview;
@@ -39,6 +39,7 @@
 	NSUInteger		_budget;
 	NSInteger		_revenue;
 	NSURL			*_trailer;
+    NSArray         *_genres;
 	NSArray			*_studios;
 	NSString		*_originalName;
 	NSString		*_alternativeName;
@@ -134,6 +135,9 @@
 /** The censorship certification for this movie. */
 @property (nonatomic, strong, readonly) NSString		*certification;
 
+/** The genres linked to this movie. */
+@property (nonatomic, strong, readonly) NSArray         *genres;
+
 @property (nonatomic, strong, readonly) NSDictionary	*userData;
 
 /**
@@ -141,7 +145,7 @@
  *
  * You can use this property to extract values that iTMDb does not already wrap in the TMDBMovie object.
  */
-@property (nonatomic, strong, readonly) NSArray			*rawResults;
+@property (nonatomic, strong, readonly) NSDictionary	*rawResults;
 
 /** @name Imagery */
 /** An array of TMDBImage objects that represent the posters used for this movie. */

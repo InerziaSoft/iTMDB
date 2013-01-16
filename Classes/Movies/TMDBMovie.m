@@ -9,7 +9,10 @@
 #import "TMDB.h"
 #import "TMDBMovie.h"
 #import "TMDBImage.h"
-#import "TMDBPerson.h"
+#import "TMDBPromisedPerson.h"
+#import "TMDBKeyword.h"
+#import "TMDBGenre.h"
+#import "TMDBCountry.h"
 
 @interface TMDBMovie ()
 
@@ -112,7 +115,7 @@
 {
     ///3/movie/{id}
     
-	NSURL *url = [NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%.1d/movie/%ld?api_key=%@&language=%@",
+	NSURL *url = [NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%.1d/movie/%ld?api_key=%@&language=%@&append_to_response=casts,images,keywords",
 									   API_VERSION, anID, aContext.apiKey, aContext.language]];
 	isSearchingOnly = NO;
 	return [self initWithURL:url context:aContext];
@@ -138,9 +141,8 @@
 #pragma mark -
 - (NSUInteger)year
 {
-	NSDateFormatter *df = [[NSDateFormatter alloc] init];
-	[df setDateFormat:@"YYYY"];
-	return [[df stringFromDate:self.released] integerValue];
+    NSDateComponents *comp = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:self.released];
+    return [comp year];
 }
 
 #pragma mark -
@@ -155,9 +157,11 @@
 		return;
 	}
 
-	_rawResults = [[NSArray alloc] initWithArray:(NSArray *)[request parsedData] copyItems:YES];
+	_rawResults = [request parsedData];
+    
+    NSLog(@"%@", _rawResults);
 
-	if (!_rawResults || ![_rawResults count] > 0 || ![[_rawResults objectAtIndex:0] isKindOfClass:[NSDictionary class]])
+	if (!_rawResults)
 	{
 		//NSLog(@"iTMDb: Returned data is NOT a dictionary!\n%@", _rawResults);
 		if (_context)
@@ -173,121 +177,92 @@
 		}
 		return;
 	}
-
-	NSDictionary *d = [_rawResults objectAtIndex:0];
-
-	// SIMPLE DATA
-	_id       = [(NSNumber *)[d objectForKey:@"id"] integerValue];
-	_title    = [[d objectForKey:@"name"] copy];
-
-	if ([d objectForKey:@"overview"] && [[d objectForKey:@"overview"] isKindOfClass:[NSString class]])
-		_overview = [[d objectForKey:@"overview"] copy];
-	else
-		_overview = nil;
-
-	if ([d objectForKey:@"tagline"] && [[d objectForKey:@"tagline"] isKindOfClass:[NSString class]])
-		_tagline  = [[d objectForKey:@"tagline"] copy];
-	if ([d objectForKey:@"imdb_id"] && [[d objectForKey:@"imdb_id"] isKindOfClass:[NSString class]])
-		_imdbID   = [[d objectForKey:@"imdb_id"] copy];
-
-	// COMPLEX DATA
-
-	// Original name
-	if ([d objectForKey:@"original_name"])
-		_originalName = [[d objectForKey:@"original_name"] copy];
-
-	// Alternative name
-	if ([d objectForKey:@"alternative_name"])
-		_alternativeName = [[d objectForKey:@"alternative_name"] copy];
-
-	// Keywords
-	if ([d objectForKey:@"keywords"] && [[d objectForKey:@"keywords"] isKindOfClass:[NSArray class]])
-	{
-		//_keywords = [[NSArray alloc] initWithArray:[d objectForKey:@"keywords"] copyItems:YES];
-		_keywords = [[d objectForKey:@"keywords"] copy];
-	}
-
-	// URL
-	if ([d objectForKey:@"url"])
-		_url = [NSURL URLWithString:[d objectForKey:@"url"]];
-
-	// Popularity
-	if ([d objectForKey:@"popularity"])
-		_popularity = [[d objectForKey:@"popularity"] integerValue];
-
-	// Votes
-	if ([d objectForKey:@"votes"])
-		_votes = [[d objectForKey:@"votes"] integerValue];
-
-	// Rating
-	if ([d objectForKey:@"rating"])
-		_rating = [[d objectForKey:@"rating"] floatValue];
-
-	// Certification
-	if ([d objectForKey:@"certification"])
-		_certification = [[d objectForKey:@"certification"] copy];
-
-	// Translated
-	if ([d objectForKey:@"translated"] && ![[d objectForKey:@"translated"] isKindOfClass:[NSNull class]])
-		_translated = [[d objectForKey:@"translated"] boolValue];
-
-	// Adult
-	if ([d objectForKey:@"adult"] && ![[d objectForKey:@"adult"] isKindOfClass:[NSNull class]])
-		_adult = [[d objectForKey:@"adult"] boolValue];
-
-	// Language
-	if ([d objectForKey:@"language"])
-		_language = [[d objectForKey:@"language"] copy];
-
-	// Version
-	if ([d objectForKey:@"version"])
-		_version = [[d objectForKey:@"version"] integerValue];
-
-	// Release date
-	if ([d objectForKey:@"released"] && [[d objectForKey:@"released"] isKindOfClass:[NSString class]])
-	{
-		NSDateFormatter *releasedFormatter = [[NSDateFormatter alloc] init];
-		[releasedFormatter setDateFormat:@"yyyy-MM-dd"];
-		_released = [releasedFormatter dateFromString:(NSString *)[d objectForKey:@"released"]];
-	}
-
-	// Runtime
-	if (!([d objectForKey:@"runtime"] == nil || [[d objectForKey:@"runtime"] isKindOfClass:[NSNull class]]))
-		_runtime  = [[d objectForKey:@"runtime"] unsignedIntegerValue];
-
-	// Homepage
-	if ([d objectForKey:@"homepage"] && [[d objectForKey:@"homepage"] isKindOfClass:[NSString class]])
-		_homepage = [NSURL URLWithString:[d objectForKey:@"homepage"]];
-	else
-		_homepage = nil;
-
-	// Posters
-	_posters = nil;
-	if ([d objectForKey:@"posters"])
-		_posters = [self arrayWithImages:[d objectForKey:@"posters"] ofType:TMDBImageTypePoster];
-	//NSLog(@"POSTERS %@", _posters);
-
-	// Backdrops
-	_backdrops = nil;
-	if ([d objectForKey:@"backdrops"])
-		_backdrops = [self arrayWithImages:[d objectForKey:@"backdrops"] ofType:TMDBImageTypeBackdrop];
-	//NSLog(@"BACKDROPS %@", _backdrops);
-
-	// Cast
-	_cast = nil;
-	if ([d objectForKey:@"cast"] && ![d isKindOfClass:[NSNull class]])
-		_cast = [TMDBPerson personsWithMovie:self personsInfo:[d objectForKey:@"cast"]];
-
-	if (isSearchingOnly)
-	{
-		isSearchingOnly = NO;
-		id myself = [self initWithID:_id context:_context];
-#pragma unused (myself)
-		return;
-	}
-
-	// Notify the context that the movie info has been loaded
-	if (_context)
+    
+    if (![[_rawResults valueForKey:@"adult"] isMemberOfClass:[NSNull class]]) {
+        _adult = [[_rawResults valueForKey:@"adult"] boolValue];
+    }
+    if (![[_rawResults valueForKey:@"budget"] isMemberOfClass:[NSNull class]]) {
+        _budget = [[_rawResults valueForKey:@"budget"] floatValue];
+    }
+    if (![[_rawResults valueForKey:@"homepage"] isMemberOfClass:[NSNull class]]) {
+        _homepage = [_rawResults valueForKey:@"homepage"];
+    }
+    if (![[_rawResults valueForKey:@"id"] isMemberOfClass:[NSNull class]]) {
+        _id = [[_rawResults valueForKey:@"id"] intValue];
+    }
+    if (![[_rawResults valueForKey:@"imdb_id"] isMemberOfClass:[NSNull class]]) {
+        _imdbID = [_rawResults valueForKey:@"imdb_id"];
+    }
+    if (![[_rawResults valueForKey:@"original_title"] isMemberOfClass:[NSNull class]]) {
+        _originalName = [_rawResults valueForKey:@"original_title"];
+    }
+    if (![[_rawResults valueForKey:@"overview"] isMemberOfClass:[NSNull class]]) {
+        _overview = [_rawResults valueForKey:@"overview"];
+    }
+    if (![[_rawResults valueForKey:@"popularity"] isMemberOfClass:[NSNull class]]) {
+        _popularity = [[_rawResults valueForKey:@"popularity"] floatValue];
+    }
+    if (![[_rawResults valueForKey:@"production_companies"] isMemberOfClass:[NSNull class]]) {
+        _studios = [[_rawResults valueForKey:@"production_companies"] copy];
+    }
+    if (![[_rawResults valueForKey:@"revenue"] isMemberOfClass:[NSNull class]]) {
+        _revenue = [[_rawResults valueForKey:@"revenue"] intValue];
+    }
+    if (![[_rawResults valueForKey:@"runtime"] isMemberOfClass:[NSNull class]]) {
+        _runtime = [[_rawResults valueForKey:@"runtime"] intValue];
+    }
+    if (![[_rawResults valueForKey:@"spoken_languages"] isMemberOfClass:[NSNull class]]) {
+        _languagesSpoken = [[_rawResults valueForKey:@"spoken_languages"] copy];
+    }
+    if (![[_rawResults valueForKey:@"tagline"] isMemberOfClass:[NSNull class]]) {
+        _tagline = [_rawResults valueForKey:@"tagline"];
+    }
+    if (![[_rawResults valueForKey:@"title"] isMemberOfClass:[NSNull class]]) {
+        _title = [_rawResults valueForKey:@"title"];
+    }
+    if (![[_rawResults valueForKey:@"vote_average"] isMemberOfClass:[NSNull class]]) {
+        _votes = [[_rawResults valueForKey:@"vote_average"] floatValue];
+    }
+    
+    NSMutableArray *newKeywords = [NSMutableArray array];
+    for (NSDictionary *key in [[[_rawResults valueForKey:@"keywords"] valueForKey:@"keywords"] copy]) {
+        [newKeywords addObject:[TMDBKeyword keywordWithID:[[key valueForKey:@"id"] intValue] andName:[key valueForKey:@"name"]]];
+    }
+    _keywords = [newKeywords copy];
+    
+    NSMutableArray *castAndCrew = [[[_rawResults valueForKey:@"casts"] valueForKey:@"cast"] mutableCopy];
+    [castAndCrew addObjectsFromArray:[[[_rawResults valueForKey:@"casts"] valueForKey:@"crew"] mutableCopy]];
+    _cast = [TMDBPromisedPerson personsWithMovie:self personsInfo:castAndCrew];
+    
+    if (![[_rawResults valueForKey:@"release_date"] isMemberOfClass:[NSNull class]]) {
+        NSDateComponents *date = [[NSDateComponents alloc] init];
+        NSArray *components = [[_rawResults valueForKey:@"release_date"] componentsSeparatedByString:@"-"];
+        [date setYear:[[components objectAtIndex:0] intValue]];
+        [date setMonth:[[components objectAtIndex:1] intValue]];
+        [date setDay:[[components objectAtIndex:2] intValue]];
+        [date setHour:0];
+        [date setMinute:0];
+        [date setSecond:0];
+        NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        _released = [cal dateFromComponents:date];
+    }
+    
+    _backdrops = [[[_rawResults valueForKey:@"images"] valueForKey:@"backdrops"] copy];
+    _posters = [[[_rawResults valueForKey:@"images"] valueForKey:@"posters"] copy];
+    
+    NSMutableArray *newGenres = [NSMutableArray array];
+    for (NSDictionary *key in [[_rawResults valueForKey:@"genres"] copy]) {
+        [newGenres addObject:[TMDBGenre genreWithID:[[key valueForKey:@"id"] intValue] andName:[key valueForKey:@"name"]]];
+    }
+    _genres = [newGenres copy];
+    
+    NSMutableArray *newCountries = [NSMutableArray array];
+    for (NSDictionary *key in [[_rawResults valueForKey:@"production_countries"] copy]) {
+        [newCountries addObject:[TMDBCountry countryWithISOCode:[key valueForKey:@"iso_3166_1"] andName:[key valueForKey:@"name"]]];
+    }
+    _countries = [newCountries copy];
+    
+    if (_context)
 		[_context movieDidFinishLoading:self];
 }
 

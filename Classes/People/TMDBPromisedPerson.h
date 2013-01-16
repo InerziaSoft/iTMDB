@@ -15,7 +15,7 @@
  *
  * This class does not interact with the TMDb API itself and thus instances are immutable model objects.
  */
-@interface TMDBPerson : NSObject {
+@interface TMDBPromisedPerson : NSObject {
 	NSUInteger _id;
 	NSString *_name;
 	NSString *_character;

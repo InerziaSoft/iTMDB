@@ -13,12 +13,16 @@
 @interface TestAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, TMDBDelegate> {
 	TMDB *tmdb;
 	TMDBMovie *movie;
+    TMDBMovieCollection *movieCollection;
 
-	NSArray *allData;
+	NSDictionary *allData;
 
 	// IBOutlets
 	IBOutlet NSWindow *window;
 	IBOutlet NSWindow *allDataWindow;
+    IBOutlet NSWindow *multipleMovies;
+    
+    IBOutlet NSArrayController *multipleMoviesController;
 
 	IBOutlet NSTextField *apiKey;
 	IBOutlet NSTextField *movieID;
@@ -28,6 +32,8 @@
 	IBOutlet NSTextField *movieTitle;
 	IBOutlet NSTextView  *movieOverview;
 	IBOutlet NSTokenField*movieKeywords;
+    IBOutlet NSTokenField*movieGenres;
+    IBOutlet NSTokenField*movieCountries;
 	IBOutlet NSTextField *movieRuntime;
 	IBOutlet NSTextField *movieReleaseDate;
 	IBOutlet NSTextField *moviePostersCount;
@@ -42,7 +48,10 @@
 
 @property (nonatomic, strong, readonly) NSWindow *window;
 
+@property (strong) NSMutableArray *multipleMoviesArray;
+
 - (IBAction)go:(id)sender;
 - (IBAction)viewAllData:(id)sender;
+- (IBAction)loadSelectedPromisedMovie:(id)sender;
 
 @end

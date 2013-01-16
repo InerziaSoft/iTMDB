@@ -16,4 +16,4 @@
 #import "TMDBMovie.h"
 #import "TMDBMovieCollection.h"
 #import "TMDBImage.h"
-#import "TMDBPerson.h"
+#import "TMDBPromisedPerson.h"
