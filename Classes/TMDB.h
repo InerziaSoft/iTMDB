@@ -4,12 +4,13 @@
 //
 //  Created by Christian Rasmussen on 04/11/10.
 //  Copyright 2010 Apoltix. All rights reserved.
+//  Modified by Alessio Moiso on 16/01/13,
+//  Copyright 2013 MrAsterisco. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
 
 #import "TMDBDelegate.h"
-#import "TMDBToken.h"
 #import "TMDBMovie.h"
 #import "TMDBMovieCollection.h"
 
@@ -18,15 +19,12 @@
 	id<TMDBDelegate> __unsafe_unretained _delegate;
 	NSString *_apiKey;
 	NSString *_language;
-	TMDBToken *_token;
 }
 
 @property (nonatomic, unsafe_unretained) id<TMDBDelegate> delegate;
 @property (nonatomic, strong) NSString *apiKey;
 @property (nonatomic, strong) NSString *language;
 @property (nonatomic, strong) NSDictionary *configuration;
-
-@property (nonatomic, strong, readonly) TMDBToken *token;
 
 /** @name Creating an Instance */
 

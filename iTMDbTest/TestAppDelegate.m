@@ -4,6 +4,8 @@
 //
 //  Created by Christian Rasmussen on 04/11/10.
 //  Copyright 2010 Apoltix. All rights reserved.
+//  Modified by Alessio Moiso on 16/01/13,
+//  Copyright 2013 MrAsterisco. All rights reserved.
 //
 
 #import "TestAppDelegate.h"
@@ -88,8 +90,16 @@
 - (IBAction)loadSelectedPromisedMovie:(id)sender {
     if ([[multipleMoviesController selectedObjects] count] > 0) {
         TMDBPromisedMovie *mov = [[multipleMoviesController selectedObjects] objectAtIndex:0];
-        movie = [tmdb movieWithID:[[mov identifier] intValue]];
+        movie = [mov movie];
     }
+}
+
+- (IBAction)loadExamplePoster:(id)sender {
+    example = [TMDBImage imageWithDictionary:[[movie posters] objectAtIndex:0] context:tmdb delegate:self];
+}
+
+- (void)tmdbImage:(TMDBImage*)image didFinishLoading:(NSImage*)aImage inContext:(TMDB*)context {
+    [moviePoster setImage:aImage];
 }
 
 #pragma mark -

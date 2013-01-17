@@ -3,10 +3,11 @@
 //  iTMDb
 //
 //  Created by Alessio Moiso on 14/01/13.
-//  Copyright (c) 2013 Apoltix. All rights reserved.
+//  Copyright (c) 2013 MrAsterisco. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "TMDBDelegate.h"
 
 @interface TMDBPromisedMovie : NSObject
 
@@ -19,7 +20,12 @@
 @property NSString *backdrop;
 @property NSString *poster;
 @property NSNumber *rate;
+@property NSDictionary *rawData;
+@property TMDBMovieCollection *collection;
 
-+ (TMDBPromisedMovie*)promisedMovie;
++ (TMDBPromisedMovie*)promisedMovieFromDictionary:(NSDictionary*)movie withCollection:(TMDBMovieCollection*)aCollection;
+- (id)initWithContentsOfDictionary:(NSDictionary*)movie fromCollection:(TMDBMovieCollection*)aCollection;
+
+- (TMDBMovie*)movie;
 
 @end

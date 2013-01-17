@@ -4,6 +4,8 @@
 //
 //  Created by Christian Rasmussen on 04/11/10.
 //  Copyright 2010 Apoltix. All rights reserved.
+//  Modified by Alessio Moiso on 16/01/13,
+//  Copyright 2013 MrAsterisco. All rights reserved.
 //
 
 #import "TMDB.h"
@@ -11,13 +13,12 @@
 @implementation TMDB
 
 @dynamic apiKey;
-@synthesize delegate=_delegate, language=_language, token=_token;
+@synthesize delegate=_delegate, language=_language;
 
 - (id)initWithAPIKey:(NSString *)anApiKey delegate:(id<TMDBDelegate>)aDelegate language:(NSString *)aLanguage
 {
 	_delegate = aDelegate;
 	_apiKey = [anApiKey copy];
-	_token = nil;
 	if (!aLanguage || [aLanguage length] == 0)
 		_language = @"en";
 	else

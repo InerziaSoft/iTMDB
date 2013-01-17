@@ -3,7 +3,7 @@
 //  iTMDb
 //
 //  Created by Alessio Moiso on 16/01/13.
-//  Copyright (c) 2013 Apoltix. All rights reserved.
+//  Copyright (c) 2013 MrAsterisco. All rights reserved.
 //
 
 #import "TMDBGenre.h"
