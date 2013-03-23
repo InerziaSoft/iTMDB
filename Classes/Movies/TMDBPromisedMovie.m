@@ -8,6 +8,7 @@
 
 #import "TMDBPromisedMovie.h"
 #import "TMDBMovieCollection.h"
+#import "TMDBImage.h"
 
 @implementation TMDBPromisedMovie
 
@@ -52,6 +53,15 @@
         }
     }
     return self;
+}
+
+- (void)loadPoster {
+    TMDBImage *image = [[TMDBImage alloc] initWithAddress:[NSURL URLWithString:self.poster] context:self.collection.context delegate:self];
+    #pragma unused (image)
+}
+
+- (void)tmdbImage:(TMDBImage*)image didFinishLoading:(NSImage*)aImage inContext:(TMDB*)context {
+    self.loadedPoster = aImage;
 }
 
 - (TMDBMovie*)movie {

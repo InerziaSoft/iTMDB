@@ -18,6 +18,7 @@
 
 - (id)initWithName:(NSString*)aName andContext:(TMDB*)aContext {
     if ([self init]) {
+        _name = aName;
         _results = [NSMutableArray array];
         NSString *aNameEscaped = [aName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL *url = [NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%.1d/search/movie?api_key=%@&language=%@&query=%@",
@@ -26,6 +27,10 @@
         _request = [TMDBRequest requestWithURL:url delegate:self];
     }
     return self;
+}
+
+- (NSString*)description {
+    return [NSString stringWithFormat:@"<%@: %@>", [self class], self.name];
 }
 
 #pragma mark -

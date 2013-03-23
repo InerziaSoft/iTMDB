@@ -20,6 +20,7 @@
 @property TMDBRequest *request;
 @property TMDB *context;
 @property NSArray *rawResults;
+@property NSString *name;
 
 + (TMDBMovieCollection*)collectionWithName:(NSString*)name andContext:(TMDB*)context;
 

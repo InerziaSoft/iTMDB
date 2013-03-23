@@ -144,7 +144,20 @@
 }
 
 - (void)tmdb:(TMDB *)context didFailLoadingMovieCollection:(TMDBMovieCollection *)movie error:(NSError*)error {
+    NSAlert *alert = [NSAlert alertWithError:error];
+	[alert beginSheetModalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
     
+	[movieTitle setStringValue:@""];
+	[movieOverview setString:@""];
+	[movieRuntime setStringValue:@"0"];
+	[movieReleaseDate setStringValue:@"00-00-0000"];
+	[moviePostersCount setStringValue:@"0 (0 sizes total)"];
+	[movieBackdropsCount setStringValue:@"0 (0 sizes total)"];
+    
+	[throbber stopAnimation:self];
+	[goButton setEnabled:YES];
+    
+	[viewAllDataButton setEnabled:NO];
 }
 		
 - (void)tmdb:(TMDB *)context didFailLoadingMovie:(TMDBMovie *)movie error:(NSError *)error
