@@ -100,6 +100,9 @@
 /** The title of the movie. */
 @property (nonatomic, strong, readonly) NSString		*title;
 
+/** The name of the TMDBMovieCollection that created this movie */
+@property (nonatomic, strong, readwrite) NSString        *collectionName;
+
 /** A description of the movie. */
 @property (nonatomic, strong, readonly) NSString		*overview;
 
@@ -194,5 +197,10 @@
 /** @name Getting the Cast and Crew */
 /** An array of `TMDBPerson` objects representing the cast and crew of the movie. */
 @property (nonatomic, strong, readonly) NSArray			*cast;
+
+/** An array containing the Studios that released this movie */
+@property (nonatomic, strong, readonly) NSArray         *studios;
+
+@property (nonatomic, readwrite) BOOL loaded;
 
 @end

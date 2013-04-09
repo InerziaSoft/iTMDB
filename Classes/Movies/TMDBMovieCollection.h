@@ -21,6 +21,7 @@
 @property TMDB *context;
 @property NSArray *rawResults;
 @property NSString *name;
+@property id contextInfo;
 
 + (TMDBMovieCollection*)collectionWithName:(NSString*)name andContext:(TMDB*)context;
 

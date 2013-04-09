@@ -18,3 +18,6 @@
 #import "TMDBMovieCollection.h"
 #import "TMDBImage.h"
 #import "TMDBPromisedPerson.h"
+#import "TMDBGenre.h"
+#import "TMDBKeyword.h"
+#import "TMDBCountry.h"

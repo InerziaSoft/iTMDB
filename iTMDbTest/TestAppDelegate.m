@@ -137,6 +137,7 @@
 - (void)tmdb:(TMDB *)context didFinishLoadingMovieCollection:(TMDBMovieCollection *)aMovie {
     self.multipleMoviesArray = [NSMutableArray array];
     for (TMDBPromisedMovie *proM in [aMovie results]) {
+        [proM loadPoster];
         [multipleMoviesController addObject:proM];
     }
     

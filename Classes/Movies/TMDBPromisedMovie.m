@@ -56,8 +56,7 @@
 }
 
 - (void)loadPoster {
-    TMDBImage *image = [[TMDBImage alloc] initWithAddress:[NSURL URLWithString:self.poster] context:self.collection.context delegate:self];
-    #pragma unused (image)
+    self.loadingPoster = [[TMDBImage alloc] initWithAddress:[NSURL URLWithString:self.poster] context:self.collection.context delegate:self andContextInfo:self];
 }
 
 - (void)tmdbImage:(TMDBImage*)image didFinishLoading:(NSImage*)aImage inContext:(TMDB*)context {

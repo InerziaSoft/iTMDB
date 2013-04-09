@@ -46,14 +46,20 @@
 	}
     
     _rawResults = [[NSArray alloc] initWithArray:(NSArray *)[[request parsedData] valueForKey:@"results"] copyItems:YES];
-    _results = [NSMutableArray arrayWithCapacity:[_rawResults count]];
-    for (NSDictionary *movie in _rawResults) {
-        TMDBPromisedMovie *proMovie = [TMDBPromisedMovie promisedMovieFromDictionary:movie withCollection:self];
-        [_results addObject:proMovie];
+    if ([_rawResults count] != 0) {
+        _results = [NSMutableArray arrayWithCapacity:[_rawResults count]];
+        for (NSDictionary *movie in _rawResults) {
+            TMDBPromisedMovie *proMovie = [TMDBPromisedMovie promisedMovieFromDictionary:movie withCollection:self];
+            [_results addObject:proMovie];
+        }
+        
+        if (_context)
+            [_context movieDidFinishLoading:self];
     }
-    
-    if (_context)
-		[_context movieDidFinishLoading:self];
+    else {
+        if (_context)
+			[_context movieDidFailLoading:self error:[NSError errorWithDomain:@"iTMDB" code:-4032 userInfo:nil]];
+    }
 }
 
 @end

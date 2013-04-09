@@ -105,6 +105,7 @@
 		_cast = nil;
 		_version = 0;
 		_modified = nil;
+        _loaded = NO;
 		
 		// Initialize the fetch request
 		_request = [TMDBRequest requestWithURL:url delegate:self];
@@ -160,8 +161,6 @@
 	}
 
 	_rawResults = [request parsedData];
-    
-    NSLog(@"%@", _rawResults);
 
 	if (!_rawResults)
 	{
@@ -254,15 +253,21 @@
     
     NSMutableArray *newGenres = [NSMutableArray array];
     for (NSDictionary *key in [[_rawResults valueForKey:@"genres"] copy]) {
-        [newGenres addObject:[TMDBGenre genreWithID:[[key valueForKey:@"id"] intValue] andName:[key valueForKey:@"name"]]];
+        if (![[key valueForKey:@"id"] isMemberOfClass:[NSNull class]]) {
+            [newGenres addObject:[TMDBGenre genreWithID:[[key valueForKey:@"id"] intValue] andName:[key valueForKey:@"name"]]];
+        }
     }
     _genres = [newGenres copy];
     
     NSMutableArray *newCountries = [NSMutableArray array];
     for (NSDictionary *key in [[_rawResults valueForKey:@"production_countries"] copy]) {
-        [newCountries addObject:[TMDBCountry countryWithISOCode:[key valueForKey:@"iso_3166_1"] andName:[key valueForKey:@"name"]]];
+        if ([[key valueForKey:@"iso_3166_1"] isMemberOfClass:[NSNull class]]) {
+            [newCountries addObject:[TMDBCountry countryWithISOCode:[key valueForKey:@"iso_3166_1"] andName:[key valueForKey:@"name"]]];
+        }
     }
     _countries = [newCountries copy];
+    
+    _loaded = YES;
     
     if (_context)
 		[_context movieDidFinishLoading:self];
