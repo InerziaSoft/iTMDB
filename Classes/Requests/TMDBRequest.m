@@ -37,6 +37,10 @@
 			_data = [NSMutableData data];
 			_delegate = delegate;
 		}
+        
+        if ([NSThread currentThread] != [NSThread mainThread]) {
+            CFRunLoopRun();
+        }
 	}
 	return self;
 }
@@ -97,6 +101,10 @@
 		_completionBlock(nil);
 	//else
 	//	NSLog(@"TMDBRequest did fail with error: %@", error);
+    
+    if ([NSThread currentThread] != [NSThread mainThread]) {
+        CFRunLoopStop(CFRunLoopGetCurrent());
+    }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -109,6 +117,10 @@
 	//	NSLog(@"TMDBRequest: Neither a delegate nor a block was set.");
 
 	_data = nil;
+    
+    if ([NSThread currentThread] != [NSThread mainThread]) {
+        CFRunLoopStop(CFRunLoopGetCurrent());
+    }
 }
 
 #pragma mark -

@@ -35,6 +35,10 @@
 #pragma mark TMDBRequestDelegate
 
 - (void)request:(TMDBRequest *)request didFinishLoading:(NSError *)error {
+    if (error != nil) {
+        NSLog(@"%@", [error localizedDescription]);
+    }
+    
     if (request != nil) {
         _context.configuration = [[request parsedData] valueForKey:@"images"];
     }

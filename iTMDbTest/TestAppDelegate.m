@@ -95,7 +95,7 @@
 }
 
 - (IBAction)loadExamplePoster:(id)sender {
-    example = [TMDBImage imageWithDictionary:[[movie posters] objectAtIndex:0] context:tmdb delegate:self];
+    example = [TMDBImage imageWithDictionary:[[movie posters] objectAtIndex:0] context:tmdb delegate:self andContextInfo:nil];
 }
 
 - (void)tmdbImage:(TMDBImage*)image didFinishLoading:(NSImage*)aImage inContext:(TMDB*)context {
