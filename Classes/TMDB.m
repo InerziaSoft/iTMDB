@@ -57,7 +57,7 @@
 #pragma mark Shortcuts
 - (TMDBMovie *)movieWithID:(NSInteger)anID
 {
-	return [TMDBMovie movieWithID:anID context:self];
+    return [TMDBMovie movieWithID:anID context:self];
 }
 
 - (TMDBMovieCollection *)movieWithName:(NSString *)aName

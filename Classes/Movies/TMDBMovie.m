@@ -68,7 +68,7 @@
 
 - (id)initWithURL:(NSURL *)url context:(TMDB *)aContext userData:(NSDictionary *)userData
 {
-	if ((self = [self init]))
+    if ((self = [self init]))
 	{
 		_context = aContext;
 
@@ -116,10 +116,9 @@
 
 - (id)initWithID:(NSInteger)anID context:(TMDB *)aContext
 {
-    ///3/movie/{id}
-    
-	NSURL *url = [NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%.1d/movie/%ld?api_key=%@&language=%@&append_to_response=casts,images,keywords",
+    NSURL *url = [NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%.1d/movie/%ld?api_key=%@&language=%@&append_to_response=casts,images,keywords",
 									   API_VERSION, anID, aContext.apiKey, aContext.language]];
+    
 	isSearchingOnly = NO;
 	return [self initWithURL:url context:aContext];
 }
@@ -154,7 +153,6 @@
 {
 	if (error)
 	{
-		//NSLog(@"iTMDb: TMDBMovie request failed: %@", [error description]);
 		if (_context)
 			[_context movieDidFailLoading:self error:error];
 		return;
@@ -164,7 +162,6 @@
 
 	if (!_rawResults)
 	{
-		//NSLog(@"iTMDb: Returned data is NOT a dictionary!\n%@", _rawResults);
 		if (_context)
 		{
 			NSDictionary *errorDict = [NSDictionary dictionaryWithObjectsAndKeys:

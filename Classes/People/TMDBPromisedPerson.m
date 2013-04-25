@@ -34,10 +34,14 @@
 		_name = [[personInfo objectForKey:@"name"] copy];
 		_character = [[personInfo objectForKey:@"character"] copy];
 		_job = [[personInfo objectForKey:@"job"] copy];
-		_url = [NSURL URLWithString:[personInfo objectForKey:@"url"]];
+        if ([personInfo objectForKey:@"url"] != nil) {
+            _url = [NSURL URLWithString:[personInfo objectForKey:@"url"]];
+        }
 		_order = [[personInfo objectForKey:@"order"] integerValue];
 		_castID = [[personInfo objectForKey:@"cast_id"] integerValue];
-		_profileURL = [NSURL URLWithString:[personInfo objectForKey:@"profile"]];
+        if ([personInfo objectForKey:@"profile"] != nil) {
+            _profileURL = [NSURL URLWithString:[personInfo objectForKey:@"profile"]];
+        }
 	}
 	return self;
 }
