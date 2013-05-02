@@ -17,7 +17,7 @@
 }
 
 - (id)initWithName:(NSString*)aName andContext:(TMDB*)aContext {
-    if ([self init]) {
+    if (self = [super init]) {
         _name = aName;
         _results = [NSMutableArray array];
         NSString *aNameEscaped = [aName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -27,6 +27,14 @@
         _request = [TMDBRequest requestWithURL:url delegate:self];
     }
     return self;
+}
+
+- (void)dealloc {
+    _contextInfo = nil;
+    _context = nil;
+    _results = nil;
+    _rawResults = nil;
+    _name = nil;
 }
 
 - (NSString*)description {
@@ -46,10 +54,13 @@
 	}
     
     _rawResults = [[NSArray alloc] initWithArray:(NSArray *)[[request parsedData] valueForKey:@"results"] copyItems:YES];
+    
+    _request = nil;
+    
     if ([_rawResults count] != 0) {
         _results = [NSMutableArray arrayWithCapacity:[_rawResults count]];
         for (NSDictionary *movie in _rawResults) {
-            TMDBPromisedMovie *proMovie = [TMDBPromisedMovie promisedMovieFromDictionary:movie withCollection:self];
+            TMDBPromisedMovie *proMovie = [TMDBPromisedMovie promisedMovieFromDictionary:movie withContext:self.context];
             [_results addObject:proMovie];
         }
         

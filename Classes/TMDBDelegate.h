@@ -38,7 +38,10 @@
  * @param movie The movie that failed to load.
  * @param error Information about the loading error.
  */
-- (void)tmdb:(TMDB *)context didFailLoadingMovie:(TMDBMovie *)movie error:(NSError *)error;
 - (void)tmdb:(TMDB *)context didFailLoadingMovieCollection:(TMDBMovieCollection *)movie error:(NSError*)error;
+
+@optional
+
+- (void)tmdb:(TMDB *)context didFailLoadingMovie:(TMDBMovie *)movie error:(NSError *)error;
 
 @end

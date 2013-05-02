@@ -12,13 +12,14 @@
 
 @implementation TMDBPromisedMovie
 
-+ (TMDBPromisedMovie*)promisedMovieFromDictionary:(NSDictionary*)movie withCollection:(TMDBMovieCollection*)aCollection {
-    return [[TMDBPromisedMovie alloc] initWithContentsOfDictionary:movie fromCollection:aCollection];
++ (TMDBPromisedMovie*)promisedMovieFromDictionary:(NSDictionary*)movie withContext:(TMDB*)context {
+    return [[TMDBPromisedMovie alloc] initWithContentsOfDictionary:movie fromContext:context];
 }
 
-- (id)initWithContentsOfDictionary:(NSDictionary*)movie fromCollection:(TMDBMovieCollection*)aCollection {
-    if ([self init]) {
-        _collection = aCollection;
+- (id)initWithContentsOfDictionary:(NSDictionary*)movie fromContext:(TMDB*)context {
+    if (self = [super init]) {
+//        _collection = aCollection;
+        _context = context;
         _rawData = movie;
         
         _adult = [NSNumber numberWithBool:(BOOL)[movie valueForKey:@"adult"]];
@@ -55,18 +56,41 @@
     return self;
 }
 
+- (void)dealloc {
+    _title = nil;
+    _adult = nil;
+    _identifier = nil;
+    _originalTitle = nil;
+    _releaseDate = nil;
+    _popularity = nil;
+    _backdrop = nil;
+    _poster = nil;
+    _loadedPoster = nil;
+    _rate = nil;
+    _rawData = nil;
+    _loadingPoster = nil;
+    _context = nil;
+}
+
 - (void)loadPoster {
     if (self.poster != nil) {
-        self.loadingPoster = [[TMDBImage alloc] initWithAddress:[NSURL URLWithString:self.poster] context:self.collection.context delegate:self andContextInfo:self];
+        [self performSelectorInBackground:@selector(loadPosterInBackgroundThread) withObject:nil];
+    }
+}
+
+- (void)loadPosterInBackgroundThread {
+    @autoreleasepool {
+        self.loadingPoster = [[TMDBImage alloc] initWithAddress:[NSURL URLWithString:self.poster] context:self.context delegate:self andContextInfo:self];
     }
 }
 
 - (void)tmdbImage:(TMDBImage*)image didFinishLoading:(NSImage*)aImage inContext:(TMDB*)context {
     self.loadedPoster = aImage;
+    _loadingPoster = nil;
 }
 
 - (TMDBMovie*)movie {
-    return [[_collection context] movieWithID:[[self identifier] intValue]];
+    return [self.context movieWithID:[[self identifier] intValue]];
 }
 
 @end

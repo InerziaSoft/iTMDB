@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSString *language;
 @property (nonatomic, strong) NSDictionary *configuration;
 
+@property (nonatomic, strong) TMDBMovieCollection *movieCollection;
+
 /** @name Creating an Instance */
 
 /**
@@ -59,6 +61,6 @@
  *
  * @param aName The name of the movie to fetch information about.
  */
-- (TMDBMovieCollection *)movieWithName:(NSString *)aName;
+- (void)movieWithName:(NSString *)aName;
 
 @end

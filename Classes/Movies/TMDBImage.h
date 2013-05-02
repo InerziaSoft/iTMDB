@@ -21,7 +21,7 @@ typedef enum {
 @property BOOL ready;
 @property TMDB *context;
 @property TMDBRequest *configurationRequest;
-@property id<TMDBImageDelegate> delegate;
+@property (unsafe_unretained) id<TMDBImageDelegate> delegate;
 @property id contextInfo;
 
 + (TMDBImage*)imageWithDictionary:(NSDictionary*)image context:(TMDB*)aContext delegate:(id<TMDBImageDelegate>)del andContextInfo:(id)contextInf;

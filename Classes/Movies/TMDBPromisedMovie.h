@@ -23,11 +23,11 @@
 @property NSImage *loadedPoster;
 @property NSNumber *rate;
 @property NSDictionary *rawData;
-@property TMDBMovieCollection *collection;
 @property TMDBImage *loadingPoster;
+@property TMDB *context;
 
-+ (TMDBPromisedMovie*)promisedMovieFromDictionary:(NSDictionary*)movie withCollection:(TMDBMovieCollection*)aCollection;
-- (id)initWithContentsOfDictionary:(NSDictionary*)movie fromCollection:(TMDBMovieCollection*)aCollection;
++ (TMDBPromisedMovie*)promisedMovieFromDictionary:(NSDictionary*)movie withContext:(TMDB*)context;
+- (id)initWithContentsOfDictionary:(NSDictionary*)movie fromContext:(TMDB*)context;
 
 - (void)loadPoster;
 - (TMDBMovie*)movie;

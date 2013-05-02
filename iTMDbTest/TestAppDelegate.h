@@ -13,10 +13,6 @@
 #import <iTMDb/iTMDb.h>
 
 @interface TestAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, TMDBDelegate, TMDBImageDelegate> {
-	TMDB *tmdb;
-	TMDBMovie *movie;
-    TMDBMovieCollection *movieCollection;
-    TMDBImage *example;
 
 	NSDictionary *allData;
 
@@ -50,6 +46,11 @@
 
 	IBOutlet NSTextView *allDataTextView;
 }
+
+@property TMDB *tmdb;
+@property TMDBMovie *movie;
+@property TMDBMovieCollection *movieCollection;
+@property TMDBImage *example;
 
 @property (nonatomic, strong, readonly) NSWindow *window;
 

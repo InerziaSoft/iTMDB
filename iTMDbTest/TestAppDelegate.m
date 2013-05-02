@@ -12,7 +12,7 @@
 
 @implementation TestAppDelegate
 
-@synthesize window;
+@synthesize window, tmdb, movie, movieCollection, example;
 
 + (void)initialize
 {
@@ -132,6 +132,10 @@
 
 	[moviePostersCount setStringValue:[NSString stringWithFormat:@"%lu", [aMovie.posters count]]];
 	[movieBackdropsCount setStringValue:[NSString stringWithFormat:@"%lu", [aMovie.backdrops count]]];
+    
+    movieCollection = nil;
+    _multipleMoviesArray = nil;
+    movie = nil;
 }
 
 - (void)tmdb:(TMDB *)context didFinishLoadingMovieCollection:(TMDBMovieCollection *)aMovie {

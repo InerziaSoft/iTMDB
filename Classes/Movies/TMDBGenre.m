@@ -15,11 +15,15 @@
 }
 
 - (id)initWithID:(int)identifier andName:(NSString*)name {
-    if ([self init]) {
+    if (self = [super init]) {
         _identifier = identifier;
         _name = name;
     }
     return self;
+}
+
+- (void)dealloc {
+    _name = nil;
 }
 
 - (NSString *)description

@@ -123,6 +123,32 @@
 	return [self initWithURL:url context:aContext];
 }
 
+- (void)dealloc {
+    _context = nil;
+    _contextInfo = nil;
+    _title = nil;
+    _collectionName = nil;
+    _overview = nil;
+    _tagline = nil;
+    _categories = nil;
+    _keywords = nil;
+    _released = nil;
+    _certification = nil;
+    _genres = nil;
+    _userData = nil;
+    _rawResults = nil;
+    _posters = nil;
+    _backdrops = nil;
+    _homepage = nil;
+    _url = nil;
+    _imdbID = nil;
+    _language = nil;
+    _languagesSpoken = nil;
+    _countries = nil;
+    _cast = nil;
+    _studios = nil;
+}
+
 #pragma mark -
 
 - (NSString *)description
@@ -183,7 +209,7 @@
         _budget = [[_rawResults valueForKey:@"budget"] floatValue];
     }
     if (![[_rawResults valueForKey:@"homepage"] isMemberOfClass:[NSNull class]]) {
-        _homepage = [_rawResults valueForKey:@"homepage"];
+        _homepage = [NSURL URLWithString:[_rawResults valueForKey:@"homepage"]];
     }
     if (![[_rawResults valueForKey:@"id"] isMemberOfClass:[NSNull class]]) {
         _id = [[_rawResults valueForKey:@"id"] intValue];
@@ -266,6 +292,8 @@
     
     _loaded = YES;
     
+    _request = nil;
+    
     if (_context)
 		[_context movieDidFinishLoading:self];
 }
@@ -300,7 +328,5 @@
 	}
 	return imageObjects;
 }
-
-#pragma mark -
 
 @end

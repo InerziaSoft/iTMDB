@@ -46,6 +46,15 @@
 	return self;
 }
 
+- (void)dealloc {
+    _character = nil;
+    _name = nil;
+    _movie = nil;
+    _job = nil;
+    _url = nil;
+    _profileURL = nil;
+}
+
 - (NSString *)description
 {
 	if (_movie      &&

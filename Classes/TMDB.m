@@ -27,6 +27,13 @@
 	return self;
 }
 
+- (void)dealloc {
+    _apiKey = nil;
+    _delegate = nil;
+    _language = nil;
+    _configuration = nil;
+}
+
 #pragma mark -
 #pragma mark Notifications
 - (void)movieDidFinishLoading:(id)aMovie
@@ -34,6 +41,7 @@
 	if (_delegate) {
         if ([aMovie isMemberOfClass:[TMDBMovieCollection class]]) {
             [_delegate tmdb:self didFinishLoadingMovieCollection:aMovie];
+            _movieCollection = nil;
         }
         else {
             [_delegate tmdb:self didFinishLoadingMovie:aMovie];
@@ -46,6 +54,7 @@
 	if (_delegate) {
         if ([aMovie isMemberOfClass:[TMDBMovieCollection class]]) {
             [_delegate tmdb:self didFailLoadingMovieCollection:aMovie error:error];
+            _movieCollection = nil;
         }
         else {
             [_delegate tmdb:self didFailLoadingMovie:aMovie error:error]; 
@@ -60,9 +69,9 @@
     return [TMDBMovie movieWithID:anID context:self];
 }
 
-- (TMDBMovieCollection *)movieWithName:(NSString *)aName
+- (void)movieWithName:(NSString *)aName
 {
-	return [TMDBMovieCollection collectionWithName:aName andContext:self];
+	self.movieCollection = [TMDBMovieCollection collectionWithName:aName andContext:self];
 }
 
 #pragma mark -

@@ -15,11 +15,16 @@
 }
 
 - (id)initWithISOCode:(NSString*)code andName:(NSString*)name {
-    if ([self init]) {
+    if (self = [super init]) {
         _isoCode = code;
         _name = name;
     }
     return self;
+}
+
+- (void)dealloc {
+    _isoCode = nil;
+    _name = nil;
 }
 
 - (NSString *)description
