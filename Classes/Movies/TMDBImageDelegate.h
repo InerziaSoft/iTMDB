@@ -14,6 +14,6 @@
 
 @required
 
-- (void)tmdbImage:(TMDBImage*)image didFinishLoading:(NSImage*)image inContext:(TMDB*)context;
+- (void)tmdbImageInContext:(TMDB*)context didFinishLoading:(NSImage*)image;
 
 @end

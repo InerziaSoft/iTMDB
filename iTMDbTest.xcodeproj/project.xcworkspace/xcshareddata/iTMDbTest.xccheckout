@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A7FB55E4-2111-45AF-B715-A0C16B0A17DB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>iTMDbTest</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D7F8DF99-6E24-44F5-9132-A4D9A9C6E7F8</key>
+		<string>https://github.com/InerziaSoft/iTMDB.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iTMDbTest.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D7F8DF99-6E24-44F5-9132-A4D9A9C6E7F8</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/InerziaSoft/iTMDB.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D7F8DF99-6E24-44F5-9132-A4D9A9C6E7F8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D7F8DF99-6E24-44F5-9132-A4D9A9C6E7F8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iTMDB</string>
+		</dict>
+	</array>
+</dict>
+</plist>

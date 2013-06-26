@@ -21,7 +21,6 @@
 	NSUInteger _id;
 	NSString *_name;
 	NSString *_character;
-	TMDBMovie *_movie;
 	NSString *_job;
 	NSURL *_url;
 	NSInteger _order;
@@ -37,7 +36,7 @@
  * @param personInfo An array of NSDictionary objects with information about the persons for which objects are to be created.
  * @return An array of `TMDBPerson` objects.
  */
-+ (NSArray *)personsWithMovie:(TMDBMovie *)movie personsInfo:(NSArray *)personsInfo;
++ (NSArray *)peopleWithPeopleInfo:(NSArray *)personsInfo;
 
 /** @name Creating an Instance */
 /**
@@ -47,7 +46,7 @@
  * @param personInfo A dictionary containing information about the person.
  * @return An immutable person object populated with the provided person information.
  */
-- (id)initWithMovie:(TMDBMovie *)movie personInfo:(NSDictionary *)personInfo;
+- (id)initWithPersonInfo:(NSDictionary *)personInfo;
 
 /** @name Basic Information */
 /** The TMDb ID of the person. */
@@ -58,9 +57,6 @@
 
 /** The name of the character the person played in the movie. */
 @property (nonatomic, copy,   readonly) NSString *character;
-
-/** The movie in which the person played a character or was part of a crew. */
-@property (nonatomic, strong, readonly) TMDBMovie *movie;
 
 /** The job position of the person in this movie. */
 @property (nonatomic, copy,   readonly) NSString *job;

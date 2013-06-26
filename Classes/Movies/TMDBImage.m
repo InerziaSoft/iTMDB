@@ -16,7 +16,6 @@
 
 - (id)initWithAddress:(NSURL*)address context:(TMDB*)aContext delegate:(id<TMDBImageDelegate>)del andContextInfo:(id)contextInf {
     if (self = [super init]) {
-        _ready = NO;
         _address = address;
         _context = aContext;
         _delegate = del;
@@ -46,17 +45,16 @@
     }
     
     if (request != nil) {
-        _context.configuration = [[request parsedData] valueForKey:@"images"];
+        self.context.configuration = [[request parsedData] valueForKey:@"images"];
     }
     
-    NSURL *finalURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", [_context.configuration valueForKey:@"base_url"], @"original", _address]];
+    NSURL *finalURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", [self.context.configuration valueForKey:@"base_url"], @"original", self.address]];
     NSImage *image = [[NSImage alloc] initWithContentsOfURL:finalURL];
     
-    _ready = YES;
     _configurationRequest = nil;
     
     if (_delegate) {
-        [_delegate tmdbImage:self didFinishLoading:image inContext:_context];
+        [self.delegate tmdbImageInContext:self.context didFinishLoading:image];
     }
 }
 

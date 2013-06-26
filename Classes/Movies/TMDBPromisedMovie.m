@@ -43,11 +43,14 @@
         if (![[movie valueForKey:@"release_date"] isMemberOfClass:[NSNull class]]) {
             NSDateComponents *date = [[NSDateComponents alloc] init];
             NSArray *components = [[movie valueForKey:@"release_date"] componentsSeparatedByString:@"-"];
-            [date setYear:[[components objectAtIndex:0] intValue]];
-            [date setMonth:[[components objectAtIndex:1] intValue]];
-            [date setDay:[[components objectAtIndex:2] intValue]];
-            NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-            _releaseDate = [cal dateFromComponents:date];
+            
+            if ([components count] == 3) {
+                [date setYear:[[components objectAtIndex:0] intValue]];
+                [date setMonth:[[components objectAtIndex:1] intValue]];
+                [date setDay:[[components objectAtIndex:2] intValue]];
+                NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+                _releaseDate = [cal dateFromComponents:date];
+            }
         }
         if (![[movie valueForKey:@"vote_average"] isMemberOfClass:[NSNull class]]) {
             _rate = [movie valueForKey:@"vote_average"];
@@ -73,24 +76,26 @@
 }
 
 - (void)loadPoster {
-    if (self.poster != nil) {
+    if (self.poster != nil || ![self.poster isMemberOfClass:[NSNull class]]) {
         [self performSelectorInBackground:@selector(loadPosterInBackgroundThread) withObject:nil];
     }
 }
 
 - (void)loadPosterInBackgroundThread {
     @autoreleasepool {
-        self.loadingPoster = [[TMDBImage alloc] initWithAddress:[NSURL URLWithString:self.poster] context:self.context delegate:self andContextInfo:self];
+        if ([self.poster respondsToSelector:@selector(length)]) {
+            self.loadingPoster = [[TMDBImage alloc] initWithAddress:[NSURL URLWithString:self.poster] context:self.context delegate:self andContextInfo:nil];
+        }
     }
 }
 
-- (void)tmdbImage:(TMDBImage*)image didFinishLoading:(NSImage*)aImage inContext:(TMDB*)context {
-    self.loadedPoster = aImage;
+- (void)tmdbImageInContext:(TMDB*)context didFinishLoading:(NSImage*)aImage {
     _loadingPoster = nil;
+    self.loadedPoster = aImage;
 }
 
-- (TMDBMovie*)movie {
-    return [self.context movieWithID:[[self identifier] intValue]];
+- (void)movie {
+    [self.context movieWithID:[[self identifier] intValue]];
 }
 
 @end

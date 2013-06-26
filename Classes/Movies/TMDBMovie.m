@@ -256,19 +256,22 @@
     
     NSMutableArray *castAndCrew = [[[_rawResults valueForKey:@"casts"] valueForKey:@"cast"] mutableCopy];
     [castAndCrew addObjectsFromArray:[[[_rawResults valueForKey:@"casts"] valueForKey:@"crew"] mutableCopy]];
-    _cast = [TMDBPromisedPerson personsWithMovie:self personsInfo:castAndCrew];
+    _cast = [TMDBPromisedPerson peopleWithPeopleInfo:castAndCrew];
     
     if (![[_rawResults valueForKey:@"release_date"] isMemberOfClass:[NSNull class]]) {
         NSDateComponents *date = [[NSDateComponents alloc] init];
         NSArray *components = [[_rawResults valueForKey:@"release_date"] componentsSeparatedByString:@"-"];
-        [date setYear:[[components objectAtIndex:0] intValue]];
-        [date setMonth:[[components objectAtIndex:1] intValue]];
-        [date setDay:[[components objectAtIndex:2] intValue]];
-        [date setHour:0];
-        [date setMinute:0];
-        [date setSecond:0];
-        NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        _released = [cal dateFromComponents:date];
+        
+        if ([components count] == 3) {
+            [date setYear:[[components objectAtIndex:0] intValue]];
+            [date setMonth:[[components objectAtIndex:1] intValue]];
+            [date setDay:[[components objectAtIndex:2] intValue]];
+            [date setHour:0];
+            [date setMinute:0];
+            [date setSecond:0];
+            NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+            _released = [cal dateFromComponents:date];
+        }
     }
     
     _backdrops = [[[_rawResults valueForKey:@"images"] valueForKey:@"backdrops"] copy];

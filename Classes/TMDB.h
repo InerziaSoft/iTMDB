@@ -25,8 +25,10 @@
 @property (nonatomic, strong) NSString *apiKey;
 @property (nonatomic, strong) NSString *language;
 @property (nonatomic, strong) NSDictionary *configuration;
+@property (nonatomic, strong) id userInfo;
 
 @property (nonatomic, strong) TMDBMovieCollection *movieCollection;
+@property (nonatomic, strong) TMDBMovie *movie;
 
 /** @name Creating an Instance */
 
@@ -52,7 +54,7 @@
  * @param anID The ID of the movie to fetch information about.
  * @return A TMDBMovie instance with the current information from the TMDb website.
  */
-- (TMDBMovie *)movieWithID:(NSInteger)anID;
+- (void)movieWithID:(NSInteger)anID;
 
 /**
  * Fetches information about the movie with the given name.

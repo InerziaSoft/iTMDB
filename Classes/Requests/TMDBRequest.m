@@ -115,7 +115,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-	if (self.delegate && [self.delegate respondsToSelector:@selector(request:didFinishLoading:)])
+	if (self.delegate != nil && self.delegate && [self.delegate respondsToSelector:@selector(request:didFinishLoading:)])
 		[self.delegate request:self didFinishLoading:nil];
 	if (_completionBlock)
 		_completionBlock([self parsedData]);

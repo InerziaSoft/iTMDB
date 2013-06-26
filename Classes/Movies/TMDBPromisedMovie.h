@@ -30,6 +30,6 @@
 - (id)initWithContentsOfDictionary:(NSDictionary*)movie fromContext:(TMDB*)context;
 
 - (void)loadPoster;
-- (TMDBMovie*)movie;
+- (void)movie;
 
 @end

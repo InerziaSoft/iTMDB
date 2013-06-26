@@ -72,9 +72,9 @@
 		[tmdb setLanguage:@"en"];
 
 	if ([movieID integerValue] > 0)
-		movie = [tmdb movieWithID:[movieID integerValue]];
+        [tmdb movieWithID:[movieID integerValue]];
 	else
-		movieCollection = [tmdb movieWithName:[movieName stringValue]];
+		[tmdb movieWithName:[movieName stringValue]];
 }
 
 - (IBAction)viewAllData:(id)sender
@@ -90,7 +90,7 @@
 - (IBAction)loadSelectedPromisedMovie:(id)sender {
     if ([[multipleMoviesController selectedObjects] count] > 0) {
         TMDBPromisedMovie *mov = [[multipleMoviesController selectedObjects] objectAtIndex:0];
-        movie = [mov movie];
+        [mov movie];
     }
 }
 
@@ -98,8 +98,8 @@
     example = [TMDBImage imageWithDictionary:[[movie posters] objectAtIndex:0] context:tmdb delegate:self andContextInfo:nil];
 }
 
-- (void)tmdbImage:(TMDBImage*)image didFinishLoading:(NSImage*)aImage inContext:(TMDB*)context {
-    [moviePoster setImage:aImage];
+- (void)tmdbImageDidFinishLoading:(NSImage *)image {
+    [moviePoster setImage:image];
 }
 
 #pragma mark -

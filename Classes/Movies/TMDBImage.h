@@ -18,7 +18,6 @@ typedef enum {
 @interface TMDBImage : NSObject <TMDBRequestDelegate>
 
 @property NSURL *address;
-@property BOOL ready;
 @property TMDB *context;
 @property TMDBRequest *configurationRequest;
 @property (unsafe_unretained) id<TMDBImageDelegate> delegate;

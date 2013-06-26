@@ -45,6 +45,7 @@
         }
         else {
             [_delegate tmdb:self didFinishLoadingMovie:aMovie];
+            _movie = nil;
         }
     }
 }
@@ -57,16 +58,17 @@
             _movieCollection = nil;
         }
         else {
-            [_delegate tmdb:self didFailLoadingMovie:aMovie error:error]; 
+            [_delegate tmdb:self didFailLoadingMovie:aMovie error:error];
+            _movie = nil;
         }
     }
 }
 
 #pragma mark -
 #pragma mark Shortcuts
-- (TMDBMovie *)movieWithID:(NSInteger)anID
+- (void)movieWithID:(NSInteger)anID
 {
-    return [TMDBMovie movieWithID:anID context:self];
+    self.movie = [TMDBMovie movieWithID:anID context:self];
 }
 
 - (void)movieWithName:(NSString *)aName

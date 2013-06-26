@@ -13,23 +13,21 @@
 
 @implementation TMDBPromisedPerson
 
-@synthesize id=_id, name=_name, character=_character, movie=_movie, job=_job, url=_url, order=_order, castID=_castID, profileURL=_profileURL;
+@synthesize id=_id, name=_name, character=_character, job=_job, url=_url, order=_order, castID=_castID, profileURL=_profileURL;
 
-+ (NSArray *)personsWithMovie:(TMDBMovie *)movie personsInfo:(NSArray *)personsInfo
++ (NSArray *)peopleWithPeopleInfo:(NSArray *)peopleInfo
 {
-	NSMutableArray *persons = [NSMutableArray arrayWithCapacity:[personsInfo count]];
+	NSMutableArray *persons = [NSMutableArray arrayWithCapacity:[peopleInfo count]];
 
-	for (NSDictionary *person in personsInfo)
-		[persons addObject:[[TMDBPromisedPerson alloc] initWithMovie:movie personInfo:person]];
+	for (NSDictionary *person in peopleInfo)
+		[persons addObject:[[TMDBPromisedPerson alloc] initWithPersonInfo:person]];
 
 	return persons;
 }
 
-- (id)initWithMovie:(TMDBMovie *)aMovie personInfo:(NSDictionary *)personInfo
+- (id)initWithPersonInfo:(NSDictionary *)personInfo
 {
-	if ((self = [super init]))
-	{
-		_movie = aMovie;
+	if ((self = [super init])) {
 		_id = [[personInfo objectForKey:@"id"] integerValue];
 		_name = [[personInfo objectForKey:@"name"] copy];
 		_character = [[personInfo objectForKey:@"character"] copy];
@@ -49,29 +47,9 @@
 - (void)dealloc {
     _character = nil;
     _name = nil;
-    _movie = nil;
     _job = nil;
     _url = nil;
     _profileURL = nil;
-}
-
-- (NSString *)description
-{
-	if (_movie      &&
-		_character  && ![_character isKindOfClass:[NSNull class]] && [_character length] > 0 &&
-		_name       && ![_name isKindOfClass:[NSNull class]]      && [_name length] > 0)
-		return [NSString stringWithFormat:@"<%@: %@ as '%@' in '%@' %@>", [self class], _name, _character, _movie.title, _movie.year > 0 ? [NSString stringWithFormat:@" (%li)", _movie.year] : @"", nil];
-	else if (_movie &&
-			 _name  && ![_name isKindOfClass:[NSNull class]]      && [_name length] > 0      &&
-			 _job   && ![_job isKindOfClass:[NSNull class]]       && [_job length] > 0)
-		return [NSString stringWithFormat:@"<%@: %@ as %@ of '%@' %@>", [self class], _name, _job, _movie.title, _movie.year > 0 ? [NSString stringWithFormat:@" (%li)", _movie.year] : @"", nil];
-	else if (_movie &&
-			 _name  && ![_name isKindOfClass:[NSNull class]]      && [_name length] > 0)
-		return [NSString stringWithFormat:@"<%@: %@ in '%@' %@>", [self class], _name, _movie.title, _movie.year > 0 ? [NSString stringWithFormat:@" (%li)", _movie.year] : @"", nil];
-	else if (_name  && ![_name isKindOfClass:[NSNull class]]      && [_name length] > 0)
-		return [NSString stringWithFormat:@"<%@: %@>", [self class], _name, nil];
-
-	return [NSString stringWithFormat:@"<%@>", [self class]];
 }
 
 
