@@ -15,6 +15,8 @@
 #import "TMDBKeyword.h"
 #import "TMDBGenre.h"
 #import "TMDBCountry.h"
+#import "TMDBLanguage.h"
+#import "TMDBCompany.h"
 
 @interface TMDBMovie ()
 
@@ -226,17 +228,11 @@
     if (![[_rawResults valueForKey:@"popularity"] isMemberOfClass:[NSNull class]]) {
         _popularity = [[_rawResults valueForKey:@"popularity"] floatValue];
     }
-    if (![[_rawResults valueForKey:@"production_companies"] isMemberOfClass:[NSNull class]]) {
-        _studios = [[_rawResults valueForKey:@"production_companies"] copy];
-    }
     if (![[_rawResults valueForKey:@"revenue"] isMemberOfClass:[NSNull class]]) {
         _revenue = [[_rawResults valueForKey:@"revenue"] intValue];
     }
     if (![[_rawResults valueForKey:@"runtime"] isMemberOfClass:[NSNull class]]) {
         _runtime = [[_rawResults valueForKey:@"runtime"] intValue];
-    }
-    if (![[_rawResults valueForKey:@"spoken_languages"] isMemberOfClass:[NSNull class]]) {
-        _languagesSpoken = [[_rawResults valueForKey:@"spoken_languages"] copy];
     }
     if (![[_rawResults valueForKey:@"tagline"] isMemberOfClass:[NSNull class]]) {
         _tagline = [_rawResults valueForKey:@"tagline"];
@@ -276,6 +272,22 @@
     
     _backdrops = [[[_rawResults valueForKey:@"images"] valueForKey:@"backdrops"] copy];
     _posters = [[[_rawResults valueForKey:@"images"] valueForKey:@"posters"] copy];
+    
+    NSMutableArray *newStudios = [NSMutableArray array];
+    for (NSDictionary *key in [_rawResults valueForKey:@"production_companies"]) {
+        if (![[key valueForKey:@"name"] isMemberOfClass:[NSNull class]]) {
+            [newStudios addObject:[TMDBCompany companyWithName:key[@"name"] andIdentifier:[NSNumber numberWithInt:(int)key[@"id"]]]];
+        }
+    }
+    _studios = newStudios;
+    
+    NSMutableArray *newLanguages = [NSMutableArray array];
+    for (NSDictionary *key in [_rawResults valueForKey:@"spoken_languages"]) {
+        if (![[key valueForKey:@"name"] isMemberOfClass:[NSNull class]]) {
+            [newLanguages addObject:[TMDBLanguage languageWithName:key[@"name"] andISOCode:key[@"iso_639_1"]]];
+        }
+    }
+    _languagesSpoken = [newLanguages copy];
     
     NSMutableArray *newGenres = [NSMutableArray array];
     for (NSDictionary *key in [[_rawResults valueForKey:@"genres"] copy]) {

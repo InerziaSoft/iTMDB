@@ -21,3 +21,5 @@
 #import "TMDBGenre.h"
 #import "TMDBKeyword.h"
 #import "TMDBCountry.h"
+#import "TMDBLanguage.h"
+#import "TMDBCompany.h"

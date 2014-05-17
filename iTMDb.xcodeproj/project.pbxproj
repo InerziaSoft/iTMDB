@@ -53,6 +53,10 @@
 		FA2DA05C16A4A37500FA51A1 /* TMDBImageDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = FA2DA05B16A4A30B00FA51A1 /* TMDBImageDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA3F411B16A31AA700E3AF19 /* TMDBMovieCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = FA3F411916A31AA700E3AF19 /* TMDBMovieCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA3F411C16A31AA700E3AF19 /* TMDBMovieCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3F411A16A31AA700E3AF19 /* TMDBMovieCollection.m */; };
+		FA9FD5B2190D59D6009CD012 /* TMDBLanguage.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9FD5B0190D59D6009CD012 /* TMDBLanguage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA9FD5B3190D59D6009CD012 /* TMDBLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FD5B1190D59D6009CD012 /* TMDBLanguage.m */; };
+		FA9FD5B7190D5B4F009CD012 /* TMDBCompany.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9FD5B5190D5B4F009CD012 /* TMDBCompany.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA9FD5B8190D5B4F009CD012 /* TMDBCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FD5B6190D5B4F009CD012 /* TMDBCompany.m */; };
 		FAAA83DE16A6B98C00F800F6 /* TMDBKeyword.h in Headers */ = {isa = PBXBuildFile; fileRef = FAAA83DC16A6B98C00F800F6 /* TMDBKeyword.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAAA83DF16A6B98C00F800F6 /* TMDBKeyword.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAA83DD16A6B98C00F800F6 /* TMDBKeyword.m */; };
 		FAAA83E316A6BFE400F800F6 /* TMDBGenre.h in Headers */ = {isa = PBXBuildFile; fileRef = FAAA83E116A6BFE400F800F6 /* TMDBGenre.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -114,6 +118,10 @@
 		FA2DA05B16A4A30B00FA51A1 /* TMDBImageDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TMDBImageDelegate.h; path = Classes/Movies/TMDBImageDelegate.h; sourceTree = "<group>"; };
 		FA3F411916A31AA700E3AF19 /* TMDBMovieCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDBMovieCollection.h; path = Classes/Movies/TMDBMovieCollection.h; sourceTree = "<group>"; };
 		FA3F411A16A31AA700E3AF19 /* TMDBMovieCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMDBMovieCollection.m; path = Classes/Movies/TMDBMovieCollection.m; sourceTree = "<group>"; };
+		FA9FD5B0190D59D6009CD012 /* TMDBLanguage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMDBLanguage.h; sourceTree = "<group>"; };
+		FA9FD5B1190D59D6009CD012 /* TMDBLanguage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMDBLanguage.m; sourceTree = "<group>"; };
+		FA9FD5B5190D5B4F009CD012 /* TMDBCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMDBCompany.h; sourceTree = "<group>"; };
+		FA9FD5B6190D5B4F009CD012 /* TMDBCompany.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMDBCompany.m; sourceTree = "<group>"; };
 		FAAA83DC16A6B98C00F800F6 /* TMDBKeyword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDBKeyword.h; path = Classes/Movies/TMDBKeyword.h; sourceTree = "<group>"; };
 		FAAA83DD16A6B98C00F800F6 /* TMDBKeyword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMDBKeyword.m; path = Classes/Movies/TMDBKeyword.m; sourceTree = "<group>"; };
 		FAAA83E116A6BFE400F800F6 /* TMDBGenre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDBGenre.h; path = Classes/Movies/TMDBGenre.h; sourceTree = "<group>"; };
@@ -223,6 +231,8 @@
 				FA2DA05216A4946800FA51A1 /* TMDBPromisedMovie.h */,
 				FA2DA05316A4946800FA51A1 /* TMDBPromisedMovie.m */,
 				FAAA83E916A6C37300F800F6 /* Countries */,
+				FA9FD5B4190D59DA009CD012 /* Languages */,
+				FA9FD5B9190D5B52009CD012 /* Company */,
 			);
 			name = Movies;
 			sourceTree = "<group>";
@@ -308,6 +318,24 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		FA9FD5B4190D59DA009CD012 /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				FA9FD5B0190D59D6009CD012 /* TMDBLanguage.h */,
+				FA9FD5B1190D59D6009CD012 /* TMDBLanguage.m */,
+			);
+			name = Languages;
+			sourceTree = "<group>";
+		};
+		FA9FD5B9190D5B52009CD012 /* Company */ = {
+			isa = PBXGroup;
+			children = (
+				FA9FD5B5190D5B4F009CD012 /* TMDBCompany.h */,
+				FA9FD5B6190D5B4F009CD012 /* TMDBCompany.m */,
+			);
+			name = Company;
+			sourceTree = "<group>";
+		};
 		FAAA83E016A6B99900F800F6 /* Keywords & Genres */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +377,8 @@
 				AAA5D56B1482A04100BD9791 /* SBJsonStreamParser.h in Headers */,
 				AAA5D56D1482A04100BD9791 /* SBJsonStreamParserAccumulator.h in Headers */,
 				AAA5D56F1482A04100BD9791 /* SBJsonStreamParserAdapter.h in Headers */,
+				FA9FD5B2190D59D6009CD012 /* TMDBLanguage.h in Headers */,
+				FA9FD5B7190D5B4F009CD012 /* TMDBCompany.h in Headers */,
 				AAA5D5711482A04100BD9791 /* SBJsonStreamParserState.h in Headers */,
 				AAA5D5731482A04100BD9791 /* SBJsonStreamWriter.h in Headers */,
 				AAA5D5751482A04100BD9791 /* SBJsonStreamWriterAccumulator.h in Headers */,
@@ -394,7 +424,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Apoltix;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "iTMDb" */;
@@ -439,6 +469,8 @@
 				AA3242CE12CBEF2F00063558 /* TMDBPromisedPerson.m in Sources */,
 				AAA5D5671482A04100BD9791 /* NSObject+SBJson.m in Sources */,
 				AAA5D56A1482A04100BD9791 /* SBJsonParser.m in Sources */,
+				FA9FD5B8190D5B4F009CD012 /* TMDBCompany.m in Sources */,
+				FA9FD5B3190D59D6009CD012 /* TMDBLanguage.m in Sources */,
 				AAA5D56C1482A04100BD9791 /* SBJsonStreamParser.m in Sources */,
 				AAA5D56E1482A04100BD9791 /* SBJsonStreamParserAccumulator.m in Sources */,
 				AAA5D5701482A04100BD9791 /* SBJsonStreamParserAdapter.m in Sources */,
@@ -472,37 +504,12 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1DEB91AE08733DA50010E9CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Massimo Moiso";
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = iTMDb_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				PRODUCT_NAME = iTMDb;
-				SDKROOT = macosx;
-				WRAPPER_EXTENSION = framework;
-			};
-			name = Debug;
-		};
 		1DEB91AF08733DA50010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Massimo Moiso";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Massimo Moiso (43C9YP2S4Y)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -512,42 +519,17 @@
 				GCC_PREFIX_HEADER = iTMDb_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = iTMDb;
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
 		};
-		1DEB91B208733DA50010E9CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_LINK_OBJC_RUNTIME = NO;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				VALID_ARCHS = "i386 x86_64";
-			};
-			name = Debug;
-		};
 		1DEB91B308733DA50010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -557,6 +539,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -574,7 +557,6 @@
 		1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "iTMDb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1DEB91AE08733DA50010E9CD /* Debug */,
 				1DEB91AF08733DA50010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -583,7 +565,6 @@
 		1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "iTMDb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1DEB91B208733DA50010E9CD /* Debug */,
 				1DEB91B308733DA50010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

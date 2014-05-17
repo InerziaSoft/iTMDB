@@ -27,4 +27,6 @@ typedef enum {
 
 - (id)initWithAddress:(NSURL*)address context:(TMDB*)aContext delegate:(id<TMDBImageDelegate>)del andContextInfo:(id)contextInf;
 
+- (void)cancel;
+
 @end

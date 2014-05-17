@@ -8,6 +8,12 @@
 
 #import "TMDBImage.h"
 
+@interface TMDBImage ()
+
+@property BOOL isCancelled;
+
+@end
+
 @implementation TMDBImage
 
 + (TMDBImage*)imageWithDictionary:(NSDictionary*)image context:(TMDB*)aContext delegate:(id<TMDBImageDelegate>)del andContextInfo:(id)contextInf {
@@ -24,6 +30,7 @@
         NSURL *url = [NSURL URLWithString:[API_URL_BASE stringByAppendingFormat:@"%.1d/configuration?api_key=%@",
                                            API_VERSION, aContext.apiKey]];
         _configurationRequest = [TMDBRequest requestWithURL:url delegate:self];
+        _isCancelled = NO;
     }
     return self;
 }
@@ -36,21 +43,28 @@
     _contextInfo = nil;
 }
 
+- (void)cancel {
+    self.isCancelled = YES;
+}
+
 #pragma mark -
 #pragma mark TMDBRequestDelegate
 
 - (void)request:(TMDBRequest *)request didFinishLoading:(NSError *)error {
-    if (error != nil) {
-        NSLog(@"%@", [error localizedDescription]);
+    NSImage *image = nil;
+    
+    if (!self.isCancelled) {
+        if (error != nil) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+        
+        if (request != nil) {
+            self.context.configuration = [[request parsedData] valueForKey:@"images"];
+        }
+        
+        NSURL *finalURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", [self.context.configuration valueForKey:@"base_url"], @"original", self.address]];
+        image = [[NSImage alloc] initWithContentsOfURL:finalURL];
     }
-    
-    if (request != nil) {
-        self.context.configuration = [[request parsedData] valueForKey:@"images"];
-    }
-    
-    NSURL *finalURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", [self.context.configuration valueForKey:@"base_url"], @"original", self.address]];
-    NSImage *image = [[NSImage alloc] initWithContentsOfURL:finalURL];
-    
     _configurationRequest = nil;
     
     if (_delegate) {
